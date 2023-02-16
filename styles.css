@@ -1,37 +1,85 @@
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  background-color: #632b00;
+  background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 button {
-  width: 95px;
-  height: 95px;
+  width: 71px;
+  height: 71px;
 }
 .buttons {
-  height: 400px;
-  width: 300px;
+  height: 450px;
+  width: 325px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  margin-right: 95px;
-  gap: 5px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 15px;
+  gap: 8px;
 }
-
-.calculator {
-  height: 500px;
-  width: 500px;
+.decimal,
+.num {
+  background-color: rgb(51, 48, 48);
+  color: white;
+  border-radius: 50px;
+  font-size: 35px;
+  border-style: none;
+}
+.equals,
+.oper {
   background-color: #d4af37;
+  color: white;
+  border-radius: 50px;
+  font-size: 35px;
+  border-style: none;
+}
+#zero {
+  height: 71px;
+  width: 155px;
+}
+.time {
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-self: flex-start;
+  margin-bottom: 70px;
+  margin-left: 25px;
+  
+}
+.calculator {
+  height: 700px;
+  width: 375px;
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 25px;
+  margin-right: 15px;
 }
 .display {
-  height: 50px;
-  width: 400px;
-  background-color: antiquewhite;
-
+  height: 100px;
+  width: 320px;
+  background-color: black;
+  color: lightgray;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  font-size: 25px;
-  font-weight: 900;
+  font-size: 70px;
+  font-weight: 100;
   margin-bottom: 7px;
+}
+.clear,
+.back,
+.pm {
+  background-color: lightgrey;
+  color: black;
+  border-radius: 50px;
+  font-size: 35px;
+  border-style: none;
 }

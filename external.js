@@ -4,17 +4,63 @@ let firstOp = null;
 let secOp = null;
 let displayVal = "0";
 let answer = null;
+
 const buttons = document.querySelectorAll("button");
 const oper = document.querySelectorAll(".oper");
 const num = document.querySelectorAll(".num");
 const calculator = document.querySelector(".calculator");
 const display = document.querySelector(".display");
 
-console.table(oper);
-console.table(num);
+function currentTime() {
+  let date = new Date(); 
+  let hh = date.getHours();
+  let mm = date.getMinutes();
+
+
+  
+
+   hh = (hh < 10) ? "0" + hh : hh;
+   mm = (mm < 10) ? "0" + mm : mm;
+   
+    
+   let time = hh + ":" + mm;
+
+  document.getElementById("clock").innerText = time; 
+  let t = setTimeout(function(){ currentTime() }, 1000);
+}
+
+currentTime();
 
 buttons.forEach((item) => {
   item.onclick = () => {
+    // backspace
+    if (item.id == "back") {
+      if (firstNum !== null && firstOp == null && secNum == null) {
+        display.innerText = display.innerText.substring(
+          0,
+          display.innerText.length - 1
+        );
+        firstNum = display.innerText;
+        updateDisplay();
+      }
+
+      if (item.className !== null && secNum == null) {
+        display.innerText = display.innerText.substring(
+          0,
+          display.innerText.length - 1
+        );
+        firstOp = null;
+        updateDisplay();
+      }
+      if (secNum !== null) {
+        display.innerText = display.innerText.substring(
+          0,
+          display.innerText.length - 1
+        );
+        secNum = secNum.substring(0, secNum.length - 1);
+        updateDisplay();
+      }
+    }
     //clear
     if (item.id == "clear") {
       display.innerText = " ";
@@ -34,13 +80,10 @@ buttons.forEach((item) => {
       secNum = secNum + item.value;
       updateDisplay();
     }
-    // backspace
-    if (item.id == "back") {
-      display.innerText = display.innerText.substring(0, display.length - 1);
-    }
+
     //  negative button
     if (
-      item.className == "+/-" &&
+      item.className == "pm" &&
       firstNum !== null &&
       firstOp == null &&
       secNum == null
@@ -49,7 +92,7 @@ buttons.forEach((item) => {
       updateDisplay();
     }
     if (
-      item.className == "+/-" &&
+      item.className == "pm" &&
       firstNum !== null &&
       firstOp !== null &&
       secNum !== null
@@ -63,13 +106,14 @@ buttons.forEach((item) => {
     //getting first number
     if (item.className == "num" && firstNum == null && firstOp == null) {
       firstNum = item.value;
+
       updateDisplay();
     } else if (item.className == "num" && firstNum != null && firstOp == null) {
       firstNum = firstNum + item.value;
       updateDisplay();
     }
     // getting operator
-    if (item.className == "oper" && firstOp == null) {
+    if (item.className == "oper" && firstOp == null && firstNum !== null) {
       firstOp = item.value;
       updateDisplay();
     }
@@ -90,6 +134,7 @@ buttons.forEach((item) => {
       secNum != null
     ) {
       display.innerText = operator(Number(firstNum), Number(secNum), firstOp);
+      display.innerText = display.innerText.substring(0, 9);
       firstNum = display.innerText;
       secNum = null;
       firstOp = item.value;
@@ -97,6 +142,7 @@ buttons.forEach((item) => {
     //equals
     if (item.className == "equals") {
       display.innerText = operator(Number(firstNum), Number(secNum), firstOp);
+      display.innerText = display.innerText.substring(0, 9);
       firstNum = display.innerText;
       secNum = null;
       firstOp = null;
